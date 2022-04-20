@@ -1,0 +1,5 @@
+<h3>Update Category</h3>
+<%= form_with model: @category, url: category_path do |form| %>
+    <%= form.text_field :name, placeholder: @category.name, value: @category.name %>
+    <%= form.submit %>
+<% end %>

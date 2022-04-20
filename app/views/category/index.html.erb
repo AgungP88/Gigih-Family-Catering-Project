@@ -1,0 +1,21 @@
+<h1> Categories </h1>
+<table>
+  <thead>
+    <tr>
+        <td><b>ID</b></td>
+        <td><b>Name</b></td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.id %></td>
+        <td><%= category.name %></td>
+        <td><a href="/category/<%= category.id %>">Details</a></td>
+        <td><a href="/category/<%= category.id %>/edit">Edits</a></td>
+        <td><%= button_to 'Delete', category_path(category), method: :delete, data: {confirm: "Are you sure?"} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<a href="/category/new">New Category</a>
