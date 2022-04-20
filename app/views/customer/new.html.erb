@@ -1,0 +1,7 @@
+<h3>Create Customer</h3>
+<%= form_with model: @customer, url: customer_index_path do |form| %>
+  <%= form.text_field :name, placeholder: "name" %>
+  <%= form.text_field :phone, placeholder: "phone" %>
+  <%= form.text_field :email, placeholder: "email" %>
+  <%= form.submit %>
+<% end %>

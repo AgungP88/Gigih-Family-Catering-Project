@@ -1,0 +1,7 @@
+<h3>Update Customer</h3>
+<%= form_with model: @customer, url: customer_path do |form| %>
+    <%= form.text_field :name, placeholder: @customer.name, value: @customer.name %>
+    <%= form.text_field :phone, placeholder: @customer.phone, value: @customer.phone %>
+    <%= form.text_field :email, placeholder: @customer.email, value: @customer.email %>
+    <%= form.submit %>
+<% end %>
