@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
-  resources :category
+  resources :category, :menu
   # resources :categories
+  # get 'menu/index'
+  # get 'menu/show'
+  # get 'menu/new'
+  # get 'menu/edit'
   # get 'category/index'
   # get 'category/show'
   # get 'category/new'

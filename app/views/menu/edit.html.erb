@@ -1,0 +1,8 @@
+<h3>Update Menu</h3>
+<%= form_with model: @menu, url: menu_path do |form| %>
+    <%= form.text_field :name, placeholder: @menu.name, value: @menu.name %>
+    <%= form.text_field :description, placeholder: @menu.description, value: @menu.description %>
+    <%= form.text_field :price, placeholder: @menu.price, value: @menu.price %>
+    <%= form.text_field :category_id, placeholder: @menu.category_id, value: @menu.category_id %>
+    <%= form.submit %>
+<% end %>

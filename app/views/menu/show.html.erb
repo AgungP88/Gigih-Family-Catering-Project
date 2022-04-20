@@ -1,0 +1,21 @@
+<h1> Menu Details </h1>
+<table>
+  <% @menu.each do |menu| %>
+    <tr>
+        <td><b>Menu name: </b></td>
+        <td><%= menu.name %></td>
+    </tr>
+    <tr>
+        <td><b>Menu description: </b></td>
+        <td><%= menu.description %></td>
+    </tr>
+    <tr>
+        <td><b>Menu price: </b></td>
+        <td><%= menu.price %></td>
+    </tr>
+    <tr>
+        <td><b>Menu category: </b></td>
+        <td><%= menu.category_id %></td>
+    </tr>
+  <% end %>
+</table>

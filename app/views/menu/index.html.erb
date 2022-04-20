@@ -1,0 +1,27 @@
+<h1> Menus </h1>
+<table>
+  <thead>
+    <tr>
+        <td><b>ID</b></td>
+        <td><b>Name</b></td>
+        <td><b>Description</b></td>
+        <td><b>Price</b></td>
+        <td><b>Category</b></td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @menus.each do |menu| %>
+      <tr>
+        <td><%= menu.id %></td>
+        <td><%= menu.name %></td>
+        <td><%= menu.description %></td>
+        <td><%= menu.price %></td>
+        <td><%= menu.category_id %></td>
+        <td><a href="/menu/<%= menu.id %>">Details</a></td>
+        <td><a href="/menu/<%= menu.id %>/edit">Edits</a></td>
+        <td><%= button_to 'Delete', menu_path(menu), method: :delete, data: {confirm: "Are you sure?"} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<a href="/menu/new">New Category</a>
