@@ -1,0 +1,25 @@
+<h1> Orders </h1>
+<table>
+  <thead>
+    <tr>
+        <td><b>ID</b></td>
+        <td><b>Customer</b></td>
+        <td><b>Total</b></td>
+        <td><b>Order Date</b></td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.id %></td>
+        <td><%= order.customer_id %></td>
+        <td><%= order.total %></td>
+        <td><%= order.order_date %></td>
+        <td><a href="/order/<%= order.id %>">Details</a></td>
+        <td><a href="/order/<%= order.id %>/edit">Edits</a></td>
+        <td><%= button_to 'Delete', order_path(order), method: :delete, data: {confirm: "Are you sure?"} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<a href="/menu/new">New Menu</a>

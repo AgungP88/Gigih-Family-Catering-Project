@@ -1,0 +1,7 @@
+<h3>Create Order</h3>
+<%= form_with model: @order, url: order_index_path do |form| %>
+  <%= form.text_field :customer_id, placeholder: "customer_id" %>
+  <%= form.text_field :total, placeholder: "Total" %>
+  <%= form.text_field :order_date, placeholder: "Order Date" %>
+  <%= form.submit %>
+<% end %>

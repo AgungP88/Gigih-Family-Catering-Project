@@ -1,0 +1,17 @@
+<h1> Order Details </h1>
+<table>
+  <% @order.each do |order| %>
+    <tr>
+        <td><b>Order Customer: </b></td>
+        <td><%= order.name %></td>
+    </tr>
+    <tr>
+        <td><b>Order Total: </b></td>
+        <td><%= order.total %></td>
+    </tr>
+    <tr>
+        <td><b>Order Date: </b></td>
+        <td><%= order.order_date %></td>
+    </tr>
+  <% end %>
+</table>
