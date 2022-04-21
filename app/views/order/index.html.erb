@@ -2,16 +2,17 @@
 <table>
   <thead>
     <tr>
-        <td><b>ID</b></td>
+        <td><b>Number</b></td>
         <td><b>Customer</b></td>
         <td><b>Total</b></td>
         <td><b>Order Date</b></td>
     </tr>
   </thead>
   <tbody>
+    <% i = 0 %>
     <% @orders.each do |order| %>
       <tr>
-        <td><%= order.id %></td>
+        <td><%= i=i+1 %></td>
         <td><%= order.customer_id %></td>
         <td><%= order.total %></td>
         <td><%= order.order_date %></td>

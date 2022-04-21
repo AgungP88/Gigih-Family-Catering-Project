@@ -2,7 +2,7 @@
 <table>
   <thead>
     <tr>
-        <td><b>ID</b></td>
+        <td><b>Number</b></td>
         <td><b>Order Id</b></td>
         <td><b>Menu Id</b></td>
         <td><b>Quantity</b></td>
@@ -10,9 +10,10 @@
     </tr>
   </thead>
   <tbody>
+    <% i = 0 %>
     <% @order_details.each do |order_detail| %>
       <tr>
-        <td><%= order_detail.id %></td>
+        <td><%= i=i+1 %></td>
         <td><%= order_detail.order_id %></td>
         <td><%= order_detail.menu_id %></td>
         <td><%= order_detail.quantity %></td>

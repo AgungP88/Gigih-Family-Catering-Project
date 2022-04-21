@@ -2,7 +2,7 @@
 <table>
   <thead>
     <tr>
-        <td><b>ID</b></td>
+        <td><b>Number</b></td>
         <td><b>Name</b></td>
         <td><b>Description</b></td>
         <td><b>Price</b></td>
@@ -10,9 +10,10 @@
     </tr>
   </thead>
   <tbody>
+    <% i = 0 %>
     <% @menus.each do |menu| %>
       <tr>
-        <td><%= menu.id %></td>
+        <td><%= i=i+1 %></td>
         <td><%= menu.name %></td>
         <td><%= menu.description %></td>
         <td><%= menu.price %></td>
