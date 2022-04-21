@@ -3,6 +3,6 @@
   <%= form.text_field :name, placeholder: "name" %>
   <%= form.text_field :description, placeholder: "description" %>
   <%= form.text_field :price, placeholder: "price" %>
-  <%= form.text_field :category_id, placeholder: "category_id" %>
+  <%= form.select(:category_id, options_for_select(@category.map{|c| [c.name,c.id]}), prompt: "Please Select") %>
   <%= form.submit %>
 <% end %>

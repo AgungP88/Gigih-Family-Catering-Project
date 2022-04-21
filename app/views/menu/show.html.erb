@@ -15,7 +15,7 @@
     </tr>
     <tr>
         <td><b>Menu category: </b></td>
-        <td><%= menu.category_id %></td>
+        <td><%= Menu.find(menu.id).category.name %></td>
     </tr>
   <% end %>
 </table>

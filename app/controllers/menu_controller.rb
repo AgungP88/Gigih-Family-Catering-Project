@@ -16,10 +16,12 @@ class MenuController < ApplicationController
 
   def new
     @menu = Menu.new
+    @category = Category.all
   end
 
   def edit
     @menu = Menu.where(id: params[:id]).first
+    @category = Category.all
   end
 
   def update

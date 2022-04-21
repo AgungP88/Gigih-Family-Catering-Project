@@ -17,7 +17,7 @@
         <td><%= menu.name %></td>
         <td><%= menu.description %></td>
         <td><%= menu.price %></td>
-        <td><%= menu.category_id %></td>
+        <td><%= Menu.find(menu.id).category.name %></td>
         <td><a href="/menu/<%= menu.id %>">Details</a></td>
         <td><a href="/menu/<%= menu.id %>/edit">Edits</a></td>
         <td><%= button_to 'Delete', menu_path(menu), method: :delete, data: {confirm: "Are you sure?"} %></td>
