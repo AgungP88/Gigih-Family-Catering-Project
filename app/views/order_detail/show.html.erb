@@ -1,2 +1,21 @@
-<h1>OrderDetail#show</h1>
-<p>Find me in app/views/order_detail/show.html.erb</p>
+<h1> OrderDetails Details </h1>
+<table>
+  <% @order_detail.each do |order_detail| %>
+    <tr>
+        <td><b>Order Detail Order-ID: </b></td>
+        <td><%= order_detail.order_id %></td>
+    </tr>
+    <tr>
+        <td><b>Order Detail Menu-ID: </b></td>
+        <td><%= order_detail.menu_id %></td>
+    </tr>
+    <tr>
+        <td><b>Order Detail Quantity: </b></td>
+        <td><%= order_detail.quantity %></td>
+    </tr>
+    <tr>
+        <td><b>Order Detail Price: </b></td>
+        <td><%= order_detail.price %></td>
+    </tr>
+  <% end %>
+</table>

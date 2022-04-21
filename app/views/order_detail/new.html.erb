@@ -1,2 +1,8 @@
-<h1>OrderDetail#new</h1>
-<p>Find me in app/views/order_detail/new.html.erb</p>
+<h3>Create OrderDetail</h3>
+<%= form_with model: @order_detail, url: order_detail_index_path do |form| %>
+  <%= form.text_field :order_id, placeholder: "order_id" %>
+  <%= form.text_field :menu_id, placeholder: "menu_id" %>
+  <%= form.text_field :quantity, placeholder: "quantity" %>
+  <%= form.text_field :price, placeholder: "Price" %>
+  <%= form.submit %>
+<% end %>

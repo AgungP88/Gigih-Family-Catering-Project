@@ -1,2 +1,8 @@
-<h1>OrderDetail#edit</h1>
-<p>Find me in app/views/order_detail/edit.html.erb</p>
+<h3>Update OrderDetails</h3>
+<%= form_with model: @order_detail, url: order_detail_path do |form| %>
+    <%= form.text_field :order_id, placeholder: @order_detail.order_id, value: @order_detail.order_id %>
+    <%= form.text_field :menu_id, placeholder: @order_detail.menu_id, value: @order_detail.menu_id %>
+    <%= form.text_field :quantity, placeholder: @order_detail.quantity, value: @order_detail.quantity %>
+    <%= form.text_field :price, placeholder: @order_detail.price, value: @order_detail.price %>
+    <%= form.submit %>
+<% end %>
