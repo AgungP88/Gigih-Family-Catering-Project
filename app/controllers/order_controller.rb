@@ -24,7 +24,7 @@ class OrderController < ApplicationController
 
   def update
     order = Order.where(id: params[:id]).first
-    order.update(params.require(:order).permit(:customer_id, :total, :order_date))
+    order.update(params.require(:order).permit(:customer_id, :total, :order_date, :status))
     redirect_to order_index_path
   end
 
@@ -37,6 +37,6 @@ class OrderController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:customer_id, :total, :order_date)
+    params.require(:order).permit(:customer_id, :total, :order_date, :status)
   end
 end

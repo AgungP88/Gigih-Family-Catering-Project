@@ -9,9 +9,17 @@ class MenuController < ApplicationController
   end
 
   def create
-    menu = Menu.create(params.require(:menu).permit(:name, :description, :price, :category_id))
+    menu = Menu.new(
+      menu_params
+    )
 
-    redirect_to menu_index_path
+    if (menu.valid?)
+      @menu = Menu.create(params.require(:menu).permit(:name, :description, :price, :category_id))
+
+      redirect_to menu_index_path
+    else
+      render :template => 'menu/new'
+    end
   end
 
   def new
@@ -25,9 +33,18 @@ class MenuController < ApplicationController
   end
 
   def update
-    menu = Menu.where(id: params[:id]).first
-    menu.update(params.require(:menu).permit(:name, :description, :price, :category_id))
-    redirect_to menu_index_path
+    @menu = Menu.where(id: params[:id]).first
+
+    menu = Menu.new(
+      menu_params
+    )
+
+    if (menu.valid?)
+      @menu.update(params.require(:menu).permit(:name, :description, :price, :category_id))
+      redirect_to menu_index_path
+    else
+      render :action => 'edit', status: :unprocessable_entity
+    end
   end
 
   def destroy

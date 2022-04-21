@@ -9,9 +9,17 @@ class CategoryController < ApplicationController
   end
 
   def create
-    category = Category.create(params.require(:category).permit(:name))
+    category = Category.new(
+      category_params
+    )
 
-    redirect_to category_index_path
+    if (category.valid?)
+      @category = Category.create(params.require(:category).permit(:name))
+
+      redirect_to category_index_path
+    else
+      render :template => 'category/new'
+    end
   end
 
   def new
@@ -23,9 +31,17 @@ class CategoryController < ApplicationController
   end
 
   def update
-    category = Category.where(id: params[:id]).first
-    category.update(params.require(:category).permit(:name))
-    redirect_to category_index_path
+    @category = Category.where(id: params[:id]).first
+    category = Category.new(
+      category_params
+    )
+
+    if (category.valid?)
+      @category.update(params.require(:category).permit(:name))
+      redirect_to category_index_path
+    else 
+      render :action => 'edit', status: :unprocessable_entity
+    end
   end
 
   def destroy

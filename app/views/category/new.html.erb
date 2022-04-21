@@ -1,5 +1,7 @@
 <h3>Create Category</h3>
 <%= form_with model: @category, url: category_index_path do |form| %>
+  <%= form.label :name %>
   <%= form.text_field :name, placeholder: "name" %>
+  <br>
   <%= form.submit %>
 <% end %>

@@ -1,8 +1,20 @@
 <h3>Create Menu</h3>
 <%= form_with model: @menu, url: menu_index_path do |form| %>
+  <%= form.label :name %>
   <%= form.text_field :name, placeholder: "name" %>
+  <br>
+
+  <%= form.label :description %>
   <%= form.text_field :description, placeholder: "description" %>
+  <br>
+
+  <%= form.label :price %>
   <%= form.text_field :price, placeholder: "price" %>
+  <br>
+
+  <%= form.label :category %>
   <%= form.select(:category_id, options_for_select(@category.map{|c| [c.name,c.id]}), prompt: "Please Select") %>
+  <br>
+    
   <%= form.submit %>
 <% end %>
