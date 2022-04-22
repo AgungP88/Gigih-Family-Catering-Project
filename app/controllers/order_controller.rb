@@ -9,17 +9,18 @@ class OrderController < ApplicationController
   end
 
   def create
-    order = Order.create(params.require(:order).permit(:customer_id, :total, :order_date))
+    order = Order.create(order_params)
 
     redirect_to order_index_path
   end
 
   def new
     @order = Order.new
+    @order.order_details.build
   end
 
   def edit
-    @order = Order.where(id: params[:id]).first
+    @order = Order.where(id: params[:id])
   end
 
   def update
@@ -37,6 +38,6 @@ class OrderController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:customer_id, :total, :order_date, :status)
+    params.require(:order).permit(:customer_id, :total, :order_date, :status, order_details_attributes: [:id, :menu_id, :quantity, :price])
   end
 end

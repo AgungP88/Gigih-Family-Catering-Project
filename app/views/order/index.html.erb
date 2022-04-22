@@ -6,6 +6,7 @@
         <td><b>Customer</b></td>
         <td><b>Total</b></td>
         <td><b>Order Date</b></td>
+        <td><b>Status</b></td>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +17,7 @@
         <td><%= order.customer_id %></td>
         <td><%= order.total %></td>
         <td><%= order.order_date %></td>
+        <td><%= order.status %></td>
         <td><a href="/order/<%= order.id %>">Details</a></td>
         <td><a href="/order/<%= order.id %>/edit">Edits</a></td>
         <td><%= button_to 'Delete', order_path(order), method: :delete, data: {confirm: "Are you sure?"} %></td>
