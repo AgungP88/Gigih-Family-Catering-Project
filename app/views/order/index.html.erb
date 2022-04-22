@@ -14,7 +14,7 @@
     <% @orders.each do |order| %>
       <tr>
         <td><%= i=i+1 %></td>
-        <td><%= order.customer_id %></td>
+        <td><%= Order.find(order.id).customer.email %></td>
         <td><%= order.total %></td>
         <td><%= order.order_date %></td>
         <td><%= order.status %></td>

@@ -17,10 +17,14 @@ class OrderController < ApplicationController
   def new
     @order = Order.new
     @order.order_details.build
+    @customer = Customer.all
+    @menu = Menu.all
   end
 
   def edit
     @order = Order.where(id: params[:id]).first
+    @customer = Customer.all
+    @menu = Menu.all
   end
 
   def update

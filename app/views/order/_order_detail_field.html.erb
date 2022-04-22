@@ -1,6 +1,6 @@
 <fieldset>
 <%= f.label :menu %>
-      <%= f.text_field :menu_id, placeholder: "Menu" %>
+      <%= f.select(:menu_id, options_for_select(@menu.map{|m| [m.name,m.id]}), prompt: "Please Select") %>
       <br>
 
       <%= f.label :quantity %>
