@@ -20,21 +20,35 @@
 
   <div class="field">
     <h5>Order Details</h5>
-    <%= form.fields_for :order_details do |builder| %>
+    <%= form.fields_for :order_details do |f| %>
       
-      <%= builder.label :menu %>
-      <%= builder.text_field :menu_id, placeholder: "Menu" %>
-      <br>
-
-      <%= builder.label :quantity %>
-      <%= builder.text_field :quantity, placeholder: "Quantity" %>
-      <br>
-
-      <%= builder.label :price %>
-      <%= builder.text_field :price, placeholder: "Price" %>
-      <br>
+      <%= render 'order_detail_field', f: f %>
     <% end %>
+    <%= link_to_add_fields "Add Detail", form, :order_details %>
   </div>
+
+      <br>
+      <br>
   
   <%= form.submit %>
 <% end %>
+
+<script>
+  $('form').on('click', '.remove-fields', function(event) {
+  console.log('clicked')
+    $(this).prev('input[type=hidden]').val('1');
+    $(this).closest('fieldset').hide();
+    return event.preventDefault();
+  });
+  
+  $('form').on('click', '.add_fields', function(event) {
+    console.log('clicked!')
+     var regexp, time;
+     time = new Date().getTime();
+     regexp = new RegExp($(this).data('id'), 'g');
+     $(this).before($(this).data('fields').replace(regexp, time));
+     return event.preventDefault();
+    });
+
+  
+</script>

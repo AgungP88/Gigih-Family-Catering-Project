@@ -1,8 +1,51 @@
 <h3>Update Orders</h3>
-<%= form_with model: @order, url: order_path do |form| %>
+<%= form_for @order, url: order_path do |form| %>
+  <div class="field">
+    <%= form.label :customer %>
     <%= form.text_field :customer_id, placeholder: @order.customer_id, value: @order.customer_id %>
+  </div>
+  <div class="field">
+    <%= form.label :total %>
     <%= form.text_field :total, placeholder: @order.total, value: @order.total %>
+  <div class="field">
+    <%= form.label :order_date %>
     <%= form.text_field :order_date, placeholder: @order.order_date, value: @order.order_date %>
+  </div>
+  <div class="field">
+    <%= form.label :status %>
     <%= form.text_field :status, placeholder: @order.status, value: @order.status %>
-    <%= form.submit %>
+  </div>
+      <br>
+
+  <div class="field">
+    <h5>Order Details</h5>
+    <%= form.fields_for :order_details do |f| %>
+      
+      <%= render 'order_detail_field', f: f %>
+    <% end %>
+    <%= link_to_add_fields "Add Detail", form, :order_details %>
+  </div>
+
+      <br>
+      <br>
+  
+  <%= form.submit %>
 <% end %>
+
+<script>
+  $('form').on('click', '.remove-fields', function(event) {
+  console.log('clicked')
+    $(this).prev('input[type=hidden]').val('1');
+    $(this).closest('fieldset').hide();
+    return event.preventDefault();
+  });
+  
+  $('form').on('click', '.add_fields', function(event) {
+    console.log('clicked!')
+     var regexp, time;
+     time = new Date().getTime();
+     regexp = new RegExp($(this).data('id'), 'g');
+     $(this).before($(this).data('fields').replace(regexp, time));
+     return event.preventDefault();
+    });
+</script>

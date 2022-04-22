@@ -1,0 +1,15 @@
+<fieldset>
+<%= f.label :menu %>
+      <%= f.text_field :menu_id, placeholder: "Menu" %>
+      <br>
+
+      <%= f.label :quantity %>
+      <%= f.text_field :quantity, placeholder: "Quantity" %>
+      <br>
+
+      <%= f.label :price %>
+      <%= f.text_field :price, placeholder: "Price" %>
+      <%= f.hidden_field :_destroy %>
+      <%= link_to "Remove", '#', class: "remove-fields" %>
+      <br>
+</fieldset>

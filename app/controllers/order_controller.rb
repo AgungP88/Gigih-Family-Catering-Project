@@ -20,12 +20,12 @@ class OrderController < ApplicationController
   end
 
   def edit
-    @order = Order.where(id: params[:id])
+    @order = Order.where(id: params[:id]).first
   end
 
   def update
     order = Order.where(id: params[:id]).first
-    order.update(params.require(:order).permit(:customer_id, :total, :order_date, :status))
+    order.update(order_params)
     redirect_to order_index_path
   end
 

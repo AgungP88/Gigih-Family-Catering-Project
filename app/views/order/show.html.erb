@@ -2,8 +2,25 @@
 <table>
   <% @order.each do |order| %>
     <tr>
-        <td><b>Order Customer: </b></td>
-        <td><%= order.name %></td>
+        <td><b>Customer : </b></td>
+    </tr>
+    <tr>
+        <td><b>Name : </b></td>
+        <td><%= Order.find(order.id).customer.name %></td>
+    </tr>
+    <tr>
+        <td><b>Phone : </b></td>
+        <td><%= Order.find(order.id).customer.phone %></td>
+    </tr>
+    <tr>
+        <td><b>Email : </b></td>
+        <td><%= Order.find(order.id).customer.email %></td>
+    </tr>
+    <tr>
+        <td><br></td>
+    </tr>
+    <tr>
+        <td><b>Order : </b></td>
     </tr>
     <tr>
         <td><b>Order Total: </b></td>
@@ -13,5 +30,32 @@
         <td><b>Order Date: </b></td>
         <td><%= order.order_date %></td>
     </tr>
+    <tr>
+        <td><b>Order Status: </b></td>
+        <td><%= order.status %></td>
+    </tr>
+    <tr>
+        <td><br></td>
+    </tr>
+    <tr>
+        <td><b>Order Detials Menu : </b></td>
+    </tr>
+    <% order.order_details.each do |detail| %>
+      <tr>
+          <td><b>Menu : </b></td>
+          <td><%= OrderDetail.find(detail.menu_id).menu.name %></td>
+      </tr>
+      <tr>
+          <td><b>Quantity : </b></td>
+          <td><%= detail.quantity %></td>
+      </tr>
+      <tr>
+          <td><b>Price : </b></td>
+          <td><%= detail.price %></td>
+      </tr>
+      <tr>
+        <td><br></td>
+    </tr>
+    <% end %>
   <% end %>
 </table>
