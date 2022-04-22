@@ -5,20 +5,22 @@ class MenuController < ApplicationController
   end
 
   def show
-    @menu = Menu.where(id: params[:id])
+    set_menu
   end
 
   def create
     menu = Menu.new(
       menu_params
     )
-
-    if (menu.valid?)
-      @menu = Menu.create(params.require(:menu).permit(:name, :description, :price, :category_id))
-
-      redirect_to menu_index_path
-    else
-      render :template => 'menu/new'
+    respond_to do |format|
+      if (menu.valid?)
+        @menu = Menu.create(menu_params)
+        format.html { redirect_to @menu, notice: 'Menu was successfully created.' }
+        format.json { render :show, status: :created, location: @menu }
+      else
+        format.html { render :new }
+        format.json { render json: @menu.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -34,28 +36,37 @@ class MenuController < ApplicationController
 
   def update
     @menu = Menu.where(id: params[:id]).first
-
     menu = Menu.new(
       menu_params
     )
-
-    if (menu.valid?)
-      @menu.update(params.require(:menu).permit(:name, :description, :price, :category_id))
-      redirect_to menu_index_path
-    else
-      render :action => 'edit', status: :unprocessable_entity
+    
+    respond_to do |format|
+      if (menu.valid?)
+        @menu.update(menu_params)
+        format.html { redirect_to @menu, notice: 'Menu was successfully update.' }
+        format.json { render :show, status: :created, location: @menu }
+      else
+        format.html { render :new }
+        format.json { render json: @menu.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
     @menu = Menu.where(id: params[:id]).first
     @menu.destroy
-
-    redirect_to menu_index_path
+    respond_to do |format|
+      format.html { redirect_to menu_index_path, notice: 'Menu was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   private
-  def menu_params
-    params.require(:menu).permit(:name, :description, :price, :category_id)
-  end
+    def set_menu
+      @menu = Menu.where(id: params[:id])
+    end
+  
+    def menu_params
+      params.require(:menu).permit(:name, :description, :price, :category_id)
+    end
 end

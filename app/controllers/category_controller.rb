@@ -5,20 +5,22 @@ class CategoryController < ApplicationController
   end
 
   def show
-    @category = Category.where(id: params[:id])
+    set_category
   end
 
   def create
     category = Category.new(
       category_params
     )
-
-    if (category.valid?)
-      @category = Category.create(params.require(:category).permit(:name))
-
-      redirect_to category_index_path
-    else
-      render :template => 'category/new'
+    respond_to do |format|
+      if (category.valid?)
+        @category = Category.create(category_params)
+        format.html { redirect_to @category, notice: 'Category was successfully created.' }
+        format.json { render :show, status: :created, location: @category }
+      else
+        format.html { render :new }
+        format.json { render json: @category.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -35,24 +37,34 @@ class CategoryController < ApplicationController
     category = Category.new(
       category_params
     )
-
-    if (category.valid?)
-      @category.update(params.require(:category).permit(:name))
-      redirect_to category_index_path
-    else 
-      render :action => 'edit', status: :unprocessable_entity
+    
+    respond_to do |format|
+      if (category.valid?)
+        @category.update(category_params)
+        format.html { redirect_to @category, notice: 'Category was successfully update.' }
+        format.json { render :show, status: :created, location: @category }
+      else
+        format.html { render :new }
+        format.json { render json: @category.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
     @category = Category.where(id: params[:id]).first
     @category.destroy
-
-    redirect_to category_index_path
+    respond_to do |format|
+      format.html { redirect_to category_index_path, notice: 'Category was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   private
-  def category_params
-    params.require(:category).permit(:name)
-  end
+    def set_category
+      @category = Category.where(id: params[:id])
+    end
+  
+    def category_params
+      params.require(:category).permit(:name)
+    end
 end

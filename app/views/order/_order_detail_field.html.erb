@@ -1,15 +1,25 @@
 <fieldset>
-<%= f.label :menu %>
-      <%= f.select(:menu_id, options_for_select(@menu.map{|m| [m.name,m.id]}), prompt: "Please Select") %>
-      <br>
+  <%= f.label :menu %>
+  <% if @order.id == nil %>
+    <%= f.select(:menu_id, options_for_select(@menu.map{|m| [m.name,m.id]}), prompt: "Please Select") %>
+  <% else %>
+    <% @ids = f.object.id != nil ? f.object.id : 4%>
+    <% puts "Testing #{@ids}"%>
+    <%= f.select(:menu_id, options_for_select(@menu.map{|m| [m.name,m.id]}, selected: OrderDetail.find("#{@ids}").menu.id), prompt: "Please Select") %>
+  <% end %>
+  <br>
 
-      <%= f.label :quantity %>
-      <%= f.text_field :quantity, placeholder: "Quantity" %>
-      <br>
+  <%= f.label :menu_id %>
+  <%= f.text_field :menu_id, placeholder: "Quantity" %>
+  <br>
 
-      <%= f.label :price %>
-      <%= f.text_field :price, placeholder: "Price" %>
-      <%= f.hidden_field :_destroy %>
-      <%= link_to "Remove", '#', class: "remove-fields" %>
-      <br>
+  <%= f.label :quantity %>
+  <%= f.text_field :quantity, placeholder: "Quantity" %>
+  <br>
+
+  <%= f.label :price %>
+  <%= f.text_field :price, placeholder: "Price" %>
+  <%= f.hidden_field :_destroy %>
+  <%= link_to "Remove", '#', class: "remove-fields" %>
+  <br>
 </fieldset>

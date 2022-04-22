@@ -5,13 +5,23 @@ class CustomerController < ApplicationController
   end
 
   def show
-    @customer = Customer.where(id: params[:id])
+    set_customer
   end
 
   def create
-    customer = Customer.create(params.require(:customer).permit(:name, :phone, :email))
-
-    redirect_to customer_index_path
+    customer = Customer.new(
+      customer_params
+    )
+    respond_to do |format|
+      if (customer.valid?)
+        @customer = Customer.create(customer_params)
+        format.html { redirect_to @customer, notice: 'Customer was successfully created.' }
+        format.json { render :show, status: :created, location: @customer }
+      else
+        format.html { render :new }
+        format.json { render json: @customer.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def new
@@ -23,20 +33,38 @@ class CustomerController < ApplicationController
   end
 
   def update
-    customer = Customer.where(id: params[:id]).first
-    customer.update(params.require(:customer).permit(:name, :phone, :email))
-    redirect_to customer_index_path
+    @customer = Customer.where(id: params[:id]).first
+    customer = Customer.new(
+      customer_params
+    )
+    
+    respond_to do |format|
+      if (customer.valid?)
+        @customer.update(customer_params)
+        format.html { redirect_to @customer, notice: 'Customer was successfully update.' }
+        format.json { render :show, status: :created, location: @customer }
+      else
+        format.html { render :new }
+        format.json { render json: @customer.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
     @customer = Customer.where(id: params[:id]).first
     @customer.destroy
-
-    redirect_to customer_index_path
+    respond_to do |format|
+      format.html { redirect_to customer_index_path, notice: 'Customer was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   private
-  def customer_params
-    params.require(:customer).permit(:name, :phone, :email)
-  end
+    def set_customer
+      @customer = Customer.where(id: params[:id])
+    end
+  
+    def customer_params
+      params.require(:customer).permit(:name, :phone, :email)
+    end
 end

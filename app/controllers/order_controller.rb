@@ -5,13 +5,23 @@ class OrderController < ApplicationController
   end
 
   def show
-    @order = Order.where(id: params[:id])
+    set_order
   end
 
   def create
-    order = Order.create(order_params)
-
-    redirect_to order_index_path
+    order = Order.new(
+      order_params
+    )
+    respond_to do |format|
+      if (order.valid?)
+        @order = Order.create(order_params)
+        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        format.json { render :show, status: :created, location: @order }
+      else
+        format.html { render :new }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def new
@@ -28,20 +38,38 @@ class OrderController < ApplicationController
   end
 
   def update
-    order = Order.where(id: params[:id]).first
-    order.update(order_params)
-    redirect_to order_index_path
+    @order = Order.where(id: params[:id]).first
+    order = Order.new(
+      order_params
+    )
+    
+    respond_to do |format|
+      if (order.valid?)
+        @order.update(order_params)
+        format.html { redirect_to @order, notice: 'Order was successfully update.' }
+        format.json { render :show, status: :created, location: @order }
+      else
+        format.html { render :new }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
     @order = Order.where(id: params[:id]).first
     @order.destroy
-
-    redirect_to order_index_path
+    respond_to do |format|
+      format.html { redirect_to order_index_path, notice: 'Order was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   private
-  def order_params
-    params.require(:order).permit(:customer_id, :total, :order_date, :status, order_details_attributes: [:id, :menu_id, :quantity, :price])
-  end
+    def set_order
+      @order = Order.where(id: params[:id])
+    end
+  
+    def order_params
+      params.require(:order).permit(:customer_id, :total, :order_date, :status, order_details_attributes: [:id, :menu_id, :quantity, :price])
+    end
 end
