@@ -1,6 +1,9 @@
-Rails.application.routes.draw do
-  
-  resources :category, :menu, :customer, :order, :order_detail
+Rails.application.routes.draw do 
+  resources :category, :menu, :customer, :order, :order_detail, :feature
+  # get 'feature/index'
+  # get 'feature/show'
+  # get 'feature/new'
+  # get 'feature/edit'
   # get 'order_detail/index'
   # get 'order_detail/show'
   # get 'order_detail/new'
