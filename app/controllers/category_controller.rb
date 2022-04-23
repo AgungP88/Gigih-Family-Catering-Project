@@ -1,7 +1,7 @@
 class CategoryController < ApplicationController
   skip_before_action :verify_authenticity_token
   def index
-    @categories = Category.all
+    @categories = params[:letter].nil? ? Category.all : Category.by_letter(params[:letter])
   end
 
   def show
