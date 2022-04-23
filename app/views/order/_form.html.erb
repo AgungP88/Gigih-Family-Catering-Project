@@ -16,7 +16,11 @@
   </div>
   <div class="field">
     <%= form.label :status %>
-    <%= form.text_field :status, placeholder: "Status" %>
+    <% if @order.id == nil %>
+      <%= form.select(:status, options_for_select(["NEW", "PAID", "CANCELED"]), prompt: "Please Select") %>
+    <% else %>
+      <%= form.select(:status, options_for_select(["NEW", "PAID", "CANCELED"], selected: form.object.status), prompt: "Please Select") %>
+    <% end %>
   </div>
       <br>
 

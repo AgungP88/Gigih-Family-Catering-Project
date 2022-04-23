@@ -18,5 +18,9 @@
         <td><b>Order Detail Price: </b></td>
         <td><%= order_detail.price %></td>
     </tr>
+    <tr>
+        <td><a href="/order_detail/<%= order_detail.id %>/edit">Edits</a></td>
+        <td><%= link_to 'Back', order_detail_index_path %></td>
+    </tr>
   <% end %>
 </table>

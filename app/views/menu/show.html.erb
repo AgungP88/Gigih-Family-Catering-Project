@@ -18,5 +18,9 @@
         <td><b>Menu category: </b></td>
         <td><%= Menu.find(menu.id).category.name %></td>
     </tr>
+    <tr>
+        <td><a href="/menu/<%= menu.id %>/edit">Edits</a></td>
+        <td><%= link_to 'Back', menu_index_path %></td>
+    </tr>
   <% end %>
 </table>

@@ -44,7 +44,7 @@
     <% order.order_details.each do |detail| %>
       <tr>
           <td><b>Menu : </b></td>
-          <td><%= OrderDetail.find(detail.menu_id).menu.name %></td>
+          <td><%= OrderDetail.find(detail.id).menu.name %></td>
       </tr>
       <tr>
           <td><b>Quantity : </b></td>

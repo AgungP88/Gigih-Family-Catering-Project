@@ -2,4 +2,5 @@
 <%= form_with model: @category, url: category_path do |form| %>
     <%= form.text_field :name, placeholder: @category.name, value: @category.name %>
     <%= form.submit %>
+    <%= link_to 'Back', category_index_path %>
 <% end %>

@@ -39,13 +39,9 @@ class OrderController < ApplicationController
 
   def update
     @order = Order.where(id: params[:id]).first
-    order = Order.new(
-      order_params
-    )
     
     respond_to do |format|
-      if (order.valid?)
-        @order.update(order_params)
+      if (@order.update(order_params))
         format.html { redirect_to @order, notice: 'Order was successfully update.' }
         format.json { render :show, status: :created, location: @order }
       else
@@ -56,6 +52,8 @@ class OrderController < ApplicationController
   end
 
   def destroy
+    @order_detail = OrderDetail.where(order_id: params[:id])
+    @order_detail.destroy_all
     @order = Order.where(id: params[:id]).first
     @order.destroy
     respond_to do |format|

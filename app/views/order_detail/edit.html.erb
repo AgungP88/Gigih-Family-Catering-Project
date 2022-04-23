@@ -5,4 +5,5 @@
     <%= form.text_field :quantity, placeholder: @order_detail.quantity, value: @order_detail.quantity %>
     <%= form.text_field :price, placeholder: @order_detail.price, value: @order_detail.price %>
     <%= form.submit %>
+    <%= link_to 'Back', order_detail_index_path %>
 <% end %>

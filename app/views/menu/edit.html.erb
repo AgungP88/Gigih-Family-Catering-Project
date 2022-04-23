@@ -5,4 +5,5 @@
     <%= form.text_field :price, placeholder: @menu.price, value: @menu.price %>
     <%= form.select(:category_id, options_for_select(@category.map{|c| [c.name,c.id]}, selected: Menu.find(@menu.id).category.id), prompt: "Please Select") %>
     <%= form.submit %>
+    <%= link_to 'Back', menu_index_path %>
 <% end %>

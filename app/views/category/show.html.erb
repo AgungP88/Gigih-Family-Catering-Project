@@ -6,5 +6,9 @@
         <td><b>Category name: </b></td>
         <td><%= category.name %></td>
     </tr>
+    <tr>
+        <td><a href="/category/<%= category.id %>/edit">Edits</a></td>
+        <td><%= link_to 'Back', category_index_path %></td>
+    </tr>
   <% end %>
 </table>
